@@ -1,11 +1,18 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import mypicture from '../assets/mypicture.png';
+import DropdownAbout from '../components/DropdownAbout';
+
 const Home = () => {
 	return (
 		<div className="bg-slate-300  lg:h-screen lg:w-screen h-auto ">
-			<Navbar />
-			<div className="flex lg:flex-row flex-col ">
+			<div className="lg:flex hidden">
+				<Navbar />
+			</div>
+			<div className="lg:hidden flex">
+				<DropdownAbout />
+			</div>
+			<div className="flex lg:flex-row flex-col  ">
 				<div className="w-1/2 pt-10 lg:pt-60 lg:pl-44 pl-10 text-justify">
 					<h1 className=" lg:text-5xl text-2xl font-mono">
 						Hi, I'm Kyle Virmar
