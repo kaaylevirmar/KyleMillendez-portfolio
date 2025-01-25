@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
 	const navigate = useNavigate();
 	return (
-		<div className=" bg-black h-screen">
-			<div className=" lg:flex  flex-col justify-center bg-slate-500 h-screen  text-white items-center p-7 px-20 font-mono drop-shadow-2x shadow-white text-lg">
+		<div className=" bg-black h-screen hidden lg:flex">
+			<div className=" flex flex-col justify-center bg-slate-500 h-screen  text-white items-center p-7 px-20 font-mono drop-shadow-2x shadow-white text-lg">
 					<div
 						className="px-10 hover:scale-105 cursor-pointer"
 						onClick={() => {
@@ -13,14 +13,6 @@ const Navbar = () => {
 						}}
 					>
 						Home
-					</div>
-					<div
-						className="px-10 hover:scale-105 cursor-pointer"
-						onClick={() => {
-							navigate('/contact');
-						}}
-					>
-						Contact
 					</div>
 					<div
 						className="px-10 hover:scale-105 cursor-pointer"

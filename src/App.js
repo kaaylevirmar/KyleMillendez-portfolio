@@ -2,7 +2,6 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
 import About from './views/About';
-import Contact from './views/Contact';
 import Projects from './views/Projects';
 import Skills from './views/Skills';
 import Navbar from './components/Navbar';
@@ -11,10 +10,10 @@ function App() {
 	return (
 		<BrowserRouter>
 			<div className='flex'>
-				<div>
+				<div >
 					<Navbar/>
 				</div>
-				<div>
+				<div className='w-screen h-screen flex justify-center items-center'>
 				<Routes>
 					<Route
 						path="/"
@@ -27,10 +26,6 @@ function App() {
 					<Route
 						path="/about"
 						element={<About />}
-					/>
-					<Route
-						path="/contact"
-						element={<Contact />}
 					/>
 					<Route
 						path="/projects"
