@@ -9,7 +9,7 @@ module.exports = {
 		},
 
 		backgroundImage: {
-			'hero-pattern': "url('./assets/bgimg.jpg')",
+			'hero-pattern': "url('./assets/new-bgimg.jpg')",
 			'Navbar-Background': "url('./assets/NavBackground.jpg')",
 		},
 	},

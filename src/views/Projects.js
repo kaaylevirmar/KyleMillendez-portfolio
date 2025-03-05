@@ -1,63 +1,120 @@
-import React from 'react';
-import { FaLaptopCode } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaLaptopCode, FaTools, FaList, FaCode } from 'react-icons/fa';
+import { Helmet } from 'react-helmet';
 
-function Projects() {
+const ProjectCard = ({ title, date, description, responsibilities, techStack, icon: Icon, colorClass }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="flex flex-col w-[1000px] items-center font-mono  gap-6 p-6 bg-gradient-to-r from-indigo-500 to-purple-500 min-h ">
-      
-      {/* Single Experience Card */}
-      <div className="bg-white text-gray-800 b  p-6 w-full">
-      <div className="text-3xl mb-10 sm:text-4xl font-bold text-black font-mono text-center">
-        Project Experience
-      </div>
-        <div className="text-sm text-center text-gray-600 mb-4"> Nabepero Philippines Inc. 2024 - Current</div>
-      <div className='flex flex-row gap-10 '>
-        {/* Sozo Section */}
-        <div className="flex flex-col space-y-4 mb-6">
-          <div className="flex items-center justify-start gap-2">
-            <FaLaptopCode className="text-blue-500 text-xl" />
-            <p className="font-semibold text-lg">Sozo</p>
+    <div 
+      className="bg-gray-800 rounded-lg p-6 shadow-xl transition-all duration-500 border border-gray-700"
+      style={{
+        transform: isHovered ? 'translateY(-5px)' : 'translateY(0)',
+        boxShadow: isHovered ? '0 20px 25px -5px rgba(0, 0, 0, 0.2)' : '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className={`p-3 rounded-lg bg-opacity-20 ${colorClass.replace('text-', 'bg-')}`}>
+            <Icon className={`text-2xl ${colorClass}`} />
           </div>
-          <p className="italic text-sm">
-            Sozo is an integrated system for Japan's cram schools to manage services like billing, exams, and attendance tracking.
-          </p>
+          <h3 className="text-xl font-bold text-gray-100">{title}</h3>
+        </div>
+        <span className="text-sm text-gray-400 font-medium">{date}</span>
+      </div>
 
-          <p className="font-semibold">Responsibilities:</p>
-          <ul className="list-inside list-disc text-sm space-y-2">
-            <li>Collaborated with Japanese engineers .</li>
-            <li>Wrote unit test and e2e tests.</li>
-            <li>Adding new features requested by clients.</li>
+      <p className="text-gray-300 italic mb-6 leading-relaxed">{description}</p>
+
+      <div className="space-y-6">
+        <div className="transform transition-all duration-300 hover:translate-x-2">
+          <div className="flex items-center gap-2 mb-3">
+            <FaList className="text-indigo-400" />
+            <h4 className="text-indigo-400 font-semibold">Responsibilities</h4>
+          </div>
+          <ul className="list-none space-y-2">
+            {responsibilities.map((item, index) => (
+              <li key={index} className="text-gray-300 text-sm flex items-start gap-2">
+                <span className="text-indigo-400 mt-1">•</span>
+                <span>{item}</span>
+              </li>
+            ))}
           </ul>
-
-          <p className="font-semibold">Tech Stack:</p>
-          <p className="text-xs text-gray-500">
-            HTML, JS, Alpine.js, CSS, Bootstrap, Laravel, MySQL, PHPUnit, Playwright
-          </p>
         </div>
 
-        {/* Jukuage Section */}
-        <div className="flex flex-col space-y-4">
-          <div className="flex items-center justify-start gap-2">
-            <FaLaptopCode className="text-yellow-500 text-xl" />
-            <p className="font-semibold text-lg">Jukuage</p>
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <FaCode className="text-indigo-400" />
+            <h4 className="text-indigo-400 font-semibold">Tech Stack</h4>
           </div>
-          <p className="italic text-sm">
-            Jukuage is an enrollment management system for cram schools to manage activity history from inquiry to enrollment.
-          </p>
-
-          <p className="font-semibold">Responsibilities:</p>
-          <ul className="list-inside list-disc text-sm space-y-2">
-            <li>API integration for Takeda system.</li>
-            <li>Collaborated with Japanese engineers</li>
-            <li>Wrote unit test and e2e tests</li>
-            <li>Adding feature requested by the users.</li>
-          </ul>
-
-          <p className="font-semibold">Tech Stack:</p>
-          <p className="text-xs text-gray-500">
-            Laravel, Livewire, PHPUnit, HTML, CSS, JavaScript, Docker, MySQL, Cypress
-          </p>
+          <div className="flex flex-wrap gap-2">
+            {techStack.map((tech, index) => (
+              <span 
+                key={index}
+                className="px-3 py-1 bg-gray-700 rounded-full text-xs text-gray-300 hover:bg-indigo-600 hover:text-white transition-all duration-300 cursor-default"
+              >
+                {tech}
+              </span>
+            ))}
           </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+function Projects() {
+  const projects = [
+    {
+      title: "Sozo",
+      date: "2024 - Current",
+      description: "Sozo is an integrated system for Japan's cram schools to manage services like billing, exams, and attendance tracking.",
+      responsibilities: [
+        "Collaborated with Japanese engineers",
+        "Wrote unit test and e2e tests",
+        "Adding new features requested by clients"
+      ],
+      techStack: [
+        "HTML", "JavaScript", "Alpine.js", "CSS", "Bootstrap", 
+        "Laravel", "MySQL", "PHPUnit", "Playwright"
+      ],
+      icon: FaLaptopCode,
+      colorClass: "text-blue-500"
+    },
+    {
+      title: "Jukuage",
+      date: "2024 - Current",
+      description: "Jukuage is an enrollment management system for cram schools to manage activity history from inquiry to enrollment.",
+      responsibilities: [
+        "API integration for Takeda system",
+        "Collaborated with Japanese engineers",
+        "Wrote unit test and e2e tests",
+        "Adding feature requested by the users"
+      ],
+      techStack: [
+        "Laravel", "Livewire", "PHPUnit", "HTML", "CSS", 
+        "JavaScript", "Docker", "MySQL", "Cypress"
+      ],
+      icon: FaTools,
+      colorClass: "text-yellow-500"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen py-8">
+      <Helmet>
+        <title>Projects - Kyle Millendez</title>
+      </Helmet>
+      <div className="max-w-4xl mx-auto px-4">
+        <h1 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+          Project Experience
+        </h1>
+        
+        <div className="space-y-8">
+          {projects.map((project, index) => (
+            <ProjectCard key={index} {...project} />
+          ))}
         </div>
       </div>
     </div>
